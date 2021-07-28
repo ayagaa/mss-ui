@@ -1,0 +1,345 @@
+.display-container {
+    width: 100%;
+    min-width: 400px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+    display: grid;
+    grid-template-columns: 95%;
+    grid-template-rows: 115px 25px 25px 110px 95px 140px;
+    grid-template-areas:
+      "time-type"
+      "datetime-title"
+      "location-data weather-description big-weather-tile"
+      "forecast-details"
+      "geo-weather-details";
+    font-family: "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+      "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  }
+  
+  .datetime-title {
+    justify-content: left;
+    padding-left: 10px;
+    padding-top: 5px;
+    margin-top: 15px;
+    cursor: default;
+  }
+  
+  .time-type {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: 50px auto;
+    grid-template-areas: "time-daily time-hourly";
+  }
+  
+  .datetime-title > h3,
+  .time-daily > h4,
+  .time-hourly > h4 {
+    text-align: left;
+    margin: 0 auto;
+  }
+  
+  .datetime-title > h3,
+  .datetime-title > time {
+    color: #767476;
+    font-weight: 600;
+  }
+  
+  .time-daily > h4,
+  .time-hourly > h4 {
+    padding-left: 10px;
+    font-weight: 500;
+  }
+  
+  .time-daily > h4:hover,
+  .time-hourly > h4:hover {
+    padding-left: 10px;
+    color: #0066ff;
+    cursor: pointer;
+  }
+  
+  .time-hourly{
+    margin-left: 10px;
+  }
+  
+  .selected-time {
+    color: #0066ff;
+  }
+  
+  .selected-time > h4 {
+    font-weight: 700;
+  }
+  
+  .disabled-time {
+    color: #929294;
+  }
+  
+  .weather-description {
+    cursor: default;
+    display: grid;
+    margin-top: 15px;
+    grid-template-columns: 150px 270px 150px;
+    grid-template-rows: auto;
+    grid-template-areas: "conditions-text . basic-details";
+  }
+  
+  .big-weather-tile {
+    cursor: default;
+    display: grid;
+    justify-content: left;
+    margin-top: -150px;
+    margin-left: 100px;
+    grid-template-columns: 230px auto 170px;
+    grid-template-rows: auto;
+    grid-template-areas: "big-icon auto big-temperature";
+  }
+  
+  .big-icon {
+    padding: 0;
+    margin-left: 80px;
+    display: flex;
+    align-content: flex-start;
+  }
+  
+  .big-icon > svg {
+    margin: 0;
+    width: 100px;
+    height: 100px;
+    fill: #0066ff;
+  }
+  
+  .big-icon > path {
+    fill: red;
+    stroke-width: 2;
+  }
+  
+  .big-temperature {
+    margin-left: -40px;
+    margin-top: 15px;
+    padding-top: 15px;
+    padding-right: 30px;
+    padding-bottom: 5px;
+  }
+  
+  .big-temperature > span {
+    font-size: 4rem;
+    margin-top: -10px;
+    font-weight: 300;
+    color: #767476;
+  }
+  
+  .big-temperature > span > sup {
+    vertical-align: super;
+    font-size: 30px;
+  }
+  
+  .big-temperature > span:first-letter {
+    font-size: 3rem;
+    float: right;
+    margin-top: 25px;
+    margin-left: 0px;
+    padding-right: 20px;
+  }
+  
+  .forecast-details {
+      margin-top: -50px;
+    width: 100%;
+  }
+  
+  .geo-weather-details {
+    height: 400px;
+    margin-top: 50px;
+    padding-top: 10px;
+    padding-left: 0px;
+    display: grid;
+    grid-template-columns: 195px 195px;
+    grid-template-rows: 60px 80px 65px auto;
+    grid-template-areas:
+      "w-sky w-humidity w-soil-temp w-soil-moisture"
+      "w-solar w-dew-point w-soil-temp w-soil-moisture"
+      "w-wind w-wind w-soil-temp w-soil-moisture";
+    grid-row-gap: 20px;
+    grid-column-gap: 10px;
+  }
+  
+  .w-sky {
+    grid-area: w-sky;
+  }
+  
+  .w-humidity {
+    grid-area: w-humidity;
+  }
+  
+  .w-solar {
+    grid-area: w-solar;
+  }
+  
+  .w-dew-point {
+    grid-area: w-dew-point;
+  }
+  
+  .w-wind {
+    grid-area: w-wind;
+  }
+  
+  .w-wind-container {
+    display: grid;
+    grid-template-columns: 130px 130px 130px;
+    grid-template-rows: 20px 20px;
+    grid-template-areas:
+      "detail-amount detail-average detail-max"
+      "detail-daymax detail-mornmax detail-min";
+  }
+  
+  .detail-amount {
+    grid-area: detail-amount;
+  }
+  
+  .detail-average {
+    grid-area: detail-average;
+  }
+  
+  .detail-daymax {
+    grid-area: detail-daymax;
+  }
+  
+  .detail-mornmax {
+    grid-area: detail-mornmax;
+  }
+  
+  .detail-max {
+    grid-area: detail-max;
+  }
+  
+  .detail-min {
+    grid-area: detail-min;
+  }
+  
+  .detail-amount,
+  .detail-average,
+  .detail-daymax,
+  .detail-mornmax,
+  .detail-max,
+  .detail-min {
+    font-size: 0.85rem;
+    text-align: left;
+    padding-top: 3px;
+    padding-left: 5px;
+  }
+  
+  .w-soil-temp {
+    grid-area: w-soil-temp;
+  }
+  
+  .w-soil-details {
+    display: hidden;
+    grid-area: w-soil-details;
+  }
+  
+  .w-soil-moisture {
+    grid-area: w-soil-moisture;
+  }
+  
+  .soil-depth {
+    margin-top: 10px;
+    margin-bottom: 3px;
+  }
+  
+  .w-title {
+    color: #0066ff;
+    padding-top: 0.25rem;
+    padding-left: 0.3rem;
+    margin-bottom: 0.25rem;
+    text-align: left;
+    cursor: default;
+  }
+  
+  .w-title > h5 {
+    margin: 0 auto;
+  }
+  
+  .w-details {
+    cursor: default;
+  }
+  
+  .w-detail {
+    font-size: 0.85rem;
+    text-align: left;
+    padding-top: 3px;
+    padding-left: 5px;
+    grid-area: w-detail;
+  }
+  
+  .conditions-text,
+  .basic-details,
+  .location-text {
+    padding-left: 10px;
+    padding-top: 10px;
+    text-align: left;
+  }
+  
+  .conditions-text > p,
+  .basic-details > p {
+    margin: 0 0 5px;
+    color: #767476;
+  }
+  
+  .location-text > p{
+      font-weight: 2em;
+  }
+  
+  .basic-details {
+    margin-top: -35px;
+    font-size: 0.75rem;
+  }
+  
+  .result-display > .scrollarea {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .advisory {
+    margin-top: 40px;
+  }
+  
+  .forecast-details > .scrollarea,
+  .advisory-details > .scrollarea {
+    width: 100%;
+  }
+  
+  .details-container {
+    padding-left: 15px;
+    padding-right: 25px;
+    padding-bottom: 5px;
+    display: flex;
+    margin-left: 10px;
+    align-items: center;
+    height: 180px;
+    position: relative;
+    float: left;
+  }
+  
+  .details-container:hover {
+    cursor: pointer;
+  }
+  
+  .advisory {
+      margin-top: 120px;
+  }
+  
+  .advisory-details {
+    height: 100px;
+  }
+
+  .no-data{
+    margin: 0 auto;
+    padding-right: 75%;
+  }
+  
+  .no-data h1{
+    text-align: center !important;
+
+  }
+  

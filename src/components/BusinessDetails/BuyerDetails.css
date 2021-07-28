@@ -1,0 +1,32 @@
+.buyer-details-container{
+    height: 90%;
+    padding: 5px;
+    display: grid;
+    column-gap: 10px;
+    grid-template-rows: auto;
+    grid-template-columns: calc(100% - 510px) 510px;
+    grid-template-areas: "instructions biz-map"
+                         "data-grid biz-map";
+}
+
+.instructions{
+    grid-area: instructions;
+    text-align: left;
+    padding-left: 15px;
+    padding-right: 15px;
+    justify-content: space-around;
+    padding-top: 20px;
+}
+
+.instructions > p{
+    margin: 0 auto;
+}
+
+.table-container{
+    grid-area: data-grid;
+    margin-top: -55px;
+}
+
+.buyer-map{
+    grid-area: biz-map;
+}
