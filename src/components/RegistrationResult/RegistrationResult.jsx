@@ -10,7 +10,7 @@ import {
 } from "@material-ui/core";
 import { CheckCircle, Error } from "@material-ui/icons";
 
-import { addFarmer, addBuyer } from "../../store/epic/userDataEpic";
+import { addFarmer, addBuyer, addGroup } from "../../store/epic/userDataEpic";
 
 export default class RegistrationResult extends Component {
   constructor(props) {
@@ -25,147 +25,140 @@ export default class RegistrationResult extends Component {
   componentDidMount() {
     const { values } = this.props;
 
-    if (values.userType === 1) {
-      let farmerBvs = [];
-      let farmerContacts = [];
-      values.farmerBV.map((bv) => {
-        farmerBvs.push({
-          bvId: bv.bvId,
-          farmerId: null,
-          latitude: bv.latitude,
-          longitude: bv.longitude,
-          wardId: values.wardId,
+    let userCreated = false;
+    let groupCreated = false;
+    let newUser;
+
+    if (values.userType === 2) {
+
+      let user = {
+        userNo: null,
+        userId: null,
+        password: values.password,
+        userType: 2,
+        firstName: values.firstName,
+        lastName: values.givenName,
+        phone: values.contactNo,
+        email: values.emailAddress
+      };
+
+      let agroInputs = [];
+
+      values.farmerBV?.map((bv) => {
+        agroInputs.push({
+          businessId: null,
+          supplyType: bv.supplyType,
+          inputName: bv.inputName
         });
       });
 
-      farmerContacts.push({
-        contactNo: values.contactNo,
-        emailAddress: values.emailAddress,
-      });
-
-      const farmerData = {
-        farmer: {
-          nationalId: values.nationalId,
-          firstName: values.firstName,
-          givenName: values.givenName,
-          otherName: values.otherName,
-          gender: values.gender,
-          farmerBvs: farmerBvs,
-          farmerContacts: farmerContacts,
-        },
-        userPassword: values.password,
+      let inputSupplier = {
+        businessId: null,
+        businessName: values.wardName,
+        registrationStatus: values.aggregator,
+        employeeCount: values.agroProcessor,
+        startYear: values.producerGroup,
+        agroInputs: agroInputs
       };
 
       const [userData, userDataDispatch] = window.store.userData;
 
-      addFarmer(farmerData, userDataDispatch).then((result) => {
+      addFarmer(user, userDataDispatch).then((result) => {
+        const {values} = this.props;
+        const [userData, userDataDispatch] = window.store.userData;
+        console.log(userData);
+        if (userData && userData.farmerData) {
+          userCreated = true;
+          newUser = userData.farmerData.user;
+          this.setState({
+            isSuccessfull: true,
+            userId: newUser.userId,
+            message: (
+              <div>
+                <p>
+                {values.labels.successResult}
+                </p>
+                <br />
+                <h2>{newUser.userId}</h2>
+              </div>
+            ),
+          });
+        }
+      });
+      
+      addGroup(inputSupplier, values.userType, userDataDispatch).then((result) => {
         const {values} = this.props;
         const [userData, userDataDispatch] = window.store.userData;
         if (userData && userData.farmerData) {
-          if (
-            userData.farmerData.errorMessage &&
-            userData.farmerData.errorMessage?.length > 0
-          ) {
-            this.setState({
-              isSuccessfull: false,
-              userId: userData.farmerData.userId,
-              message: (
-                <div>
-                  <p>
-                    {values.labels.failureResult}
-                  </p>
-                  <br />
-                  <h2>{userData.farmerData.errorMessage}</h2>
-                </div>
-              ),
-            });
-          } else if (userData.farmerData.errorMessage === null) {
-            this.setState({
-              isSuccessfull: true,
-              userId: userData.farmerData.userId,
-              message: (
-                <div>
-                  <p>
-                  {values.labels.successResult}
-                  </p>
-                  <br />
-                  <h2>{userData.farmerData.userId}</h2>
-                </div>
-              ),
-            });
-          }
+          groupCreated = true;
         }
       });
-    } else if (values.userType === 2) {
-      let buyerContacts = [];
-      let buyerPreferences = [];
+    } else if (values.userType === 5) {
 
-      buyerContacts.push({
-        contactNo: values.contactNo,
-        emailAddress: values.emailAddress,
-        latitude: values.latitude,
-        longitude: values.longitude,
-        wardId: values.wardId,
-      });
+      let user = {
+        userNo: null,
+        userId: null,
+        password: values.password,
+        userType: 5,
+        firstName: values.firstName,
+        lastName: values.givenName,
+        phone: values.contactNo,
+        email: values.emailAddress
+      };
 
-      values.buyerBV.map((bv) => {
-        buyerPreferences.push({
-          bvId: bv.bvId,
-          purchasePower: bv.purchasePower,
-          um: bv.um,
+      let groupMembers = [];
+
+      values.buyerBV?.map((bv) => {
+        groupMembers.push({
+          memberId: null,
+          groupId: null,
+          nationalId: bv.nationalId,
+          phoneNumber: bv.phoneNumber,
+          age: bv.age,
+          sex: bv.sex
         });
       });
 
-      const buyerData = {
-        buyer: {
-          nationalId: values.nationalId,
-          firstName: values.firstName,
-          givenName: values.givenName,
-          otherName: values.otherName,
-          gender: values.gender,
-          buyerContacts: buyerContacts,
-          buyerPreferences: buyerPreferences,
-        },
-        userPassword: values.password,
-      };
+      let producerGroup = {
+        groupId: null,
+        groupName: values.gender,
+        groupType: "producer group",
+        county: values.county,
+        subCounty: values.subCounty,
+        ward: values.wardName,
+        village: values.latitude,
+        primaryCrop: values.longitude,
+        producerGroupMembers: groupMembers
+      }
 
       const [userData, userDataDispatch] = window.store.userData;
 
-      addBuyer(buyerData, userDataDispatch).then((result) => {
+      addFarmer(user, userDataDispatch).then((result) => {
+        const {values} = this.props;
         const [userData, userDataDispatch] = window.store.userData;
-        if (userData) {
-          if (
-            userData.buyerData.errorMessage &&
-            userData.buyerData.errorMessage?.length > 0
-          ) {
-            this.setState({
-              isSuccessfull: false,
-              userId: userData.buyerData.userId,
-              message: (
-                <div>
-                  <p>
-                  {values.labels.failureResult}
-                  </p>
-                  <br />
-                  <h2>{userData.buyerData.errorMessage}</h2>
-                </div>
-              ),
-            });
-          } else if (userData.buyerData.errorMessage === null) {
-            this.setState({
-              isSuccessfull: true,
-              userId: userData.buyerData.userId,
-              message: (
-                <div>
-                  <p>
-                  {values.labels.successResult}
-                  </p>
-                  <br />
-                  <h2>{userData.buyerData.userId}</h2>
-                </div>
-              ),
-            });
-          }
+        if (userData && userData.farmerData) {
+          userCreated = true;
+          newUser = userData.farmerData.user;
+          this.setState({
+            isSuccessfull: true,
+            userId: newUser.userId,
+            message: (
+              <div>
+                <p>
+                {values.labels.successResult}
+                </p>
+                <br />
+                <h2>{newUser.userId}</h2>
+              </div>
+            ),
+          });
+        }
+      });
+
+      addGroup(producerGroup, values.userType, userDataDispatch).then((result) => {
+        const [userData, userDataDispatch] = window.store.userData;
+        if (userData && userData.farmerData) {
+          groupCreated = true;
         }
       });
     }

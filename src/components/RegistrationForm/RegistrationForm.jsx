@@ -120,52 +120,60 @@ export class RegistrationForm extends Component {
       farmerBV: [],
       userName: "",
       password: "",
-      aggregator:{
-        businessName: "",
-        businessType: "",
-        registrationStatus: "",
-        employeeCount: 0,
-        startYear: 0,
-        aggregatorDetails: [],
-        aggregatorCounties: []
-      },
-      agroinputSupplier:{
-        businessName: "",
-        registrationStatus: "",
-        employeeCount: 0,
-        startYear: 0,
-        agroInputs: []
-      },
-      agroProcessor:{
-        businessName: "",
-        registrationStatus: "",
-        employeeCount: 0,
-        startYear: 0,
-        agroProcessorsProducts:[]
-      },
-      producerGroup:{
-        groupName: "",
-        groupType: "",
-        county: "",
-        subCounty: "",
-        ward: "",
-        village: "",
-        primaryCrop: "",
-        producerGroupMembers: []
-      },
-      technicalServiceProvider:{
-        institutionName: "",
-        institutionType: "",
-        employeeCount: 0,
-        technicalServices:[]
-      },
-      trader:{
-        businessName: "",
-        registrationStatus:"",
-        employeeCount: 0,
-        startYear: 0,
-        traderCounties: []
-      },
+      aggregator: null,
+      agroinputSupplier: null,
+      agroProcessor: null,
+      producerGroup: null,
+      technicalServiceProvider: null,
+      trader: null,
+      county: null,
+      subCounty: null,
+      // aggregator:{
+      //   businessName: "",
+      //   businessType: "",
+      //   registrationStatus: "",
+      //   employeeCount: 0,
+      //   startYear: 0,
+      //   aggregatorDetails: [],
+      //   aggregatorCounties: []
+      // },
+      // agroinputSupplier:{
+      //   businessName: "",
+      //   registrationStatus: "",
+      //   employeeCount: 0,
+      //   startYear: 0,
+      //   agroInputs: []
+      // },
+      // agroProcessor:{
+      //   businessName: "",
+      //   registrationStatus: "",
+      //   employeeCount: 0,
+      //   startYear: 0,
+      //   agroProcessorsProducts:[]
+      // },
+      // producerGroup:{
+      //   groupName: "",
+      //   groupType: "",
+      //   county: "",
+      //   subCounty: "",
+      //   ward: "",
+      //   village: "",
+      //   primaryCrop: "",
+      //   producerGroupMembers: []
+      // },
+      // technicalServiceProvider:{
+      //   institutionName: "",
+      //   institutionType: "",
+      //   employeeCount: 0,
+      //   technicalServices:[]
+      // },
+      // trader:{
+      //   businessName: "",
+      //   registrationStatus:"",
+      //   employeeCount: 0,
+      //   startYear: 0,
+      //   traderCounties: []
+      // },
       submitted: false,
       hasError: false,
       errorText: "",
@@ -316,7 +324,9 @@ export class RegistrationForm extends Component {
       agroProcessor,
       producerGroup,
       technicalServiceProvider,
-      trader
+      trader,
+      county,
+      subCounty
     } = this.state;
 
     let errorChecker = false;
@@ -387,7 +397,9 @@ export class RegistrationForm extends Component {
       agroProcessor,
       producerGroup,
       technicalServiceProvider,
-      trader
+      trader,
+      county,
+      subCounty
     } = this.state;
 
     if (step < 5) {
@@ -435,7 +447,9 @@ export class RegistrationForm extends Component {
       agroProcessor: agroProcessor,
       producerGroup: producerGroup,
       technicalServiceProvider: technicalServiceProvider,
-      trader: trader
+      trader: trader,
+      county: county,
+      subCounty: subCounty
     };
   };
 
@@ -536,11 +550,11 @@ export class RegistrationForm extends Component {
 
   handleChange = (input, e, lat = null, lon = null) => {
     let inputValue = "";
-    if (input === "buyerBV" && lat && lon && e === null) {
-      this.setState({
-        latitude: lat,
-        longitude: lon,
-      });
+    if (input === "buyerBV" && e === null) {
+      // this.setState({
+      //   latitude: lat,
+      //   longitude: lon,
+      // });
     } else if (input === "buyerBV" && e && e?.length >= 0) {
       this.setState({
         buyerBV: e,
@@ -567,6 +581,8 @@ export class RegistrationForm extends Component {
 
       const ward = subCounty.wards.find((w) => w.wardId === e.target.value);
       this.setState({
+        county: county.countyName,
+        subCounty: subCounty.subCountyName,
         wardId: ward.wardId,
         wardName: ward.wardName,
       });
@@ -581,6 +597,7 @@ export class RegistrationForm extends Component {
 
   render() {
     const steps = this.getSteps();
+
 
     const {
       step,
@@ -611,8 +628,11 @@ export class RegistrationForm extends Component {
       agroProcessor,
       producerGroup,
       technicalServiceProvider,
-      trader
+      trader,
+      county,
+      subCounty
     } = this.state;
+
 
     const applicationValues = {
       nationalId,
@@ -640,7 +660,9 @@ export class RegistrationForm extends Component {
       agroProcessor,
       producerGroup,
       technicalServiceProvider,
-      trader
+      trader,
+      county,
+      subCounty
     };
 
     let stepLabel = this.getStepContent(step, userType);

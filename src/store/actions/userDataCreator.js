@@ -8,10 +8,29 @@ export const UPDATE_BUYER = 'UPDATE_BUYER';
 
 export const FARMERS_FETCHED = 'FARMERS_FETCHED';
 
+export const GROUP_ADDED = 'GROUP_ADDED';
+
+export const POST_ADDED = 'POST_ADDED';
+
 export function farmersFetched(farmers){
     return {
         type: FARMERS_FETCHED,
         farmers
+    };
+}
+
+
+export function postAdded(farmer){
+    return {
+        type: POST_ADDED,
+        farmer
+    };
+}
+
+export function groupAdded(farmer){
+    return {
+        type: GROUP_ADDED,
+        farmer
     };
 }
 

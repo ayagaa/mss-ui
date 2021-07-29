@@ -80,12 +80,12 @@ export default class PersonalDetailsForm extends Component {
                   id: "outlined-age-native-simple",
                 }}
               >
-                <option value={1}>Aggregator</option>
+                {/* <option value={1}>Aggregator</option> */}
                 <option value={2}>AgroInput Supplier</option>
-                <option value={3}>Agro Processor</option>
+                {/* <option value={3}>Agro Processor</option> */}
                 <option value={5}>Producer Groups</option>
-                <option value={6}>Technical Service Providers</option>
-                <option value={7}>Trader</option>
+                {/* <option value={6}>Technical Service Providers</option>
+                <option value={7}>Trader</option> */}
               </Select>
             </FormControl>
           </form>

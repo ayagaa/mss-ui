@@ -198,22 +198,26 @@ function LoginForm(props) {
       userId: formData.userEmail,
       password: formData.userPassword,
       userType: 0,
+      firstName: "",
+      lastName: "",
+      phone: "",
+      email: "",
       errorMessage: ''
     }
+   
     authenticateUser(loginDetails, authDispatch)
       .then((response) => {
         const [authUser] = window.store.authUser;
         if (authUser.authUser && authUser.authUser.user) {
-          if (authUser.authUser.user?.userType === 0) {
+          console.log(authUser);
+          if (authUser.authUser.user?.userType !== 0) {
             console.log(authUser.authUser);
-            history.push("/admin-view");
-          } else if (authUser.authUser.user?.userType === 1) {
-            history.push("/farmer-view");
+            history.push("/posts");
+          } else if (authUser.authUser.user?.userType === 0) {
+            history.push("/posts");
           } else if (authUser.authUser.user?.userType === 2) {
-            history.push("/buyer-view");
+            history.push("/posts");
           }
-        } else {
-
         }
       });
   };
