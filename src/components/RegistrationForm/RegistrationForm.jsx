@@ -338,28 +338,28 @@ export class RegistrationForm extends Component {
       // );
     }
     if (step === 2) {
-      if (userType === 1) {
-        errorChecker = !(aggregator.businessName.length > 0 &&
-          aggregator.businessType.length > 0 && aggregator.aggregatorDetails.length > 0);
-      }
-      if (userType === 2) {
-        errorChecker = !(agroinputSupplier.businessName.length > 0 && agroinputSupplier.agroInputs.length > 0);
-      }
-      if(userType === 3){
-        errorChecker = !(agroProcessor.businessName.length > 0 && agroProcessor.agroProcessorsProducts.length > 0)
-      }
-      if(userType === 5){
-        errorChecker = !(producerGroup.groupName.length > 0 && producerGroup.groupType.length > 0 && producerGroup.county.length > 0 &&
-          producerGroup.subCounty.length > 0 && producerGroup.ward.length > 0 && producerGroup.village.length > 0 &&
-          producerGroup.producerGroupMembers.length > 0)
-      }
-      if(userType === 6){
-        errorChecker = !(technicalServiceProvider.institutionName.length > 0 && technicalServiceProvider.institutionType.length > 0 &&
-          technicalServiceProvider.technicalServices.length > 0)
-      }
-      if(userType === 7){
-        errorChecker = !(trader.businessName.length > 0 && trader.traderCounties.length > 0)
-      }
+      // if (userType === 1) {
+      //   errorChecker = !(aggregator?.businessName.length > 0 &&
+      //     aggregator?.businessType.length > 0 && aggregator?.aggregatorDetails?.length > 0);
+      // }
+      // if (userType === 2) {
+      //   errorChecker = !(agroinputSupplier.businessName.length > 0 && agroinputSupplier.agroInputs.length > 0);
+      // }
+      // if(userType === 3){
+      //   errorChecker = !(agroProcessor.businessName.length > 0 && agroProcessor.agroProcessorsProducts.length > 0)
+      // }
+      // if(userType === 5){
+      //   errorChecker = !(producerGroup.groupName.length > 0 && producerGroup.groupType.length > 0 && producerGroup.county.length > 0 &&
+      //     producerGroup.subCounty.length > 0 && producerGroup.ward.length > 0 && producerGroup.village.length > 0 &&
+      //     producerGroup.producerGroupMembers.length > 0)
+      // }
+      // if(userType === 6){
+      //   errorChecker = !(technicalServiceProvider.institutionName.length > 0 && technicalServiceProvider.institutionType.length > 0 &&
+      //     technicalServiceProvider.technicalServices.length > 0)
+      // }
+      // if(userType === 7){
+      //   errorChecker = !(trader.businessName.length > 0 && trader.traderCounties.length > 0)
+      // }
     }
     if (step === 4) {
       // errorChecker = !(password.length > 0);
