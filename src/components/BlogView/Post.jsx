@@ -9,17 +9,31 @@ import Typography from "@material-ui/core/Typography";
 import Chip from "@material-ui/core/Chip";
 import Avatar from "@material-ui/core/Avatar";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import IconButton from "@material-ui/core/IconButton";
+import ShareIcon from "@material-ui/icons/Share";
 
 import "./Post.css";
 
 export default class Post extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isAdmin: true,
+    };
+  }
+
+  showDialog = (postId) =>{
+    const { showShareDialog } = this.props;
+    showShareDialog(postId);
+  }
+
   render() {
-    const {post} = this.props;
+    const { post, showShareDialog, userType } = this.props;
     return (
       <div className="post-container">
         <div className="post-header">
           <div className="post-type">
-            <Chip color="primary" label="Post Type" />
+            <Chip color="primary" label={post?.postType} />
           </div>
           <div className="post-auther">
             <div className="user-icon">
@@ -36,15 +50,22 @@ export default class Post extends Component {
         </div>
         <div className="post-body">
           <div className="post-title">
-          <Typography component="h1" variant="h6">
-            {post?.title}
-          </Typography>
+            <Typography component="h1" variant="h6">
+              {post?.title}
+            </Typography>
           </div>
           <div className="post-message">
             <p>{post?.post}</p>
           </div>
-          <div className="post-date">
-            <span>Post Date: {post?.postDate}</span>
+          <div className="post-footer">
+            <div className="post-date">
+              <span>Post Date: {post?.postDate}</span>
+              <div className="post-share" hidden={(userType !== 0)}>
+                <IconButton color="primary" onClick={() => this.showDialog(post?.postId)} aria-label="add to shopping cart">
+                  <ShareIcon />
+                </IconButton>
+              </div>
+            </div>
           </div>
         </div>
       </div>

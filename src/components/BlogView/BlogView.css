@@ -4,3 +4,19 @@
     padding-top: 20px;
     padding-bottom: 10px;
 }
+
+.logout-button{
+    position: absolute;
+    top: 25px;
+    left: 85%;
+}
+
+.title-container{
+    height: 10px;
+}
+
+.tab-menu-bar{
+    background-color: white;
+    height: 55px;
+    padding-top: 10px;
+}

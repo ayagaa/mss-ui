@@ -13,6 +13,8 @@ const ADD_GROUP_URL = 'http://138.68.144.98/api/fgd/register';
 
 const ADD_POST_URL = 'http://138.68.144.98/api/fgd/makepost';
 
+const ADD_POST_TARGET_URL = 'http://138.68.144.98/api/fgd/targetpost';
+
 // const ADD_FARMER_URL = 'http://localhost:5000/api/farmers/register';
 
 // const GET_FARMERS_URL = 'http://localhost:5000/api/farmers';
@@ -33,6 +35,10 @@ export function addGroup(data, group) {
 
 export function addPost(data) {
     return post(ADD_POST_URL, {}, JSON.stringify(data));
+}
+
+export function targetPost(data) {
+    return post(ADD_POST_TARGET_URL, {}, JSON.stringify(data));
 }
 
 export function addFarmer(data) {

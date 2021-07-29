@@ -12,6 +12,8 @@ export const GROUP_ADDED = 'GROUP_ADDED';
 
 export const POST_ADDED = 'POST_ADDED';
 
+export const POST_TARGET_ADDED = 'POST_TARGET_ADDED';
+
 export function farmersFetched(farmers){
     return {
         type: FARMERS_FETCHED,
@@ -23,6 +25,13 @@ export function farmersFetched(farmers){
 export function postAdded(farmer){
     return {
         type: POST_ADDED,
+        farmer
+    };
+}
+
+export function postTargetAdded(farmer){
+    return {
+        type: POST_TARGET_ADDED,
         farmer
     };
 }

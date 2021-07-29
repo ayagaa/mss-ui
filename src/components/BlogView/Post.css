@@ -50,11 +50,19 @@
     text-align: left;
     padding-left: 20px;
     padding-right: 20px;
-    text-overflow: ellipsis;
+    word-wrap: break-word;
+    /* text-overflow: ellipsis; */
 }
 
 .post-message>p{
     color: #aaa;
+
+}
+
+.post-footer{
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
 }
 
 .post-date{
@@ -62,4 +70,10 @@
     margin-left: 20px;
     margin-top: 10px;
     text-align: left;
+}
+
+.post-share{
+    float: right;
+    margin-top: -15px;
+    margin-right: 15px;
 }

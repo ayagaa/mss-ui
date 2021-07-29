@@ -1,6 +1,6 @@
 import { useReducer } from 'react';
 
-import { ADD_FARMER, ADD_BUYER, FARMERS_FETCHED, GROUP_ADDED, POST_ADDED } from "../actions/userDataCreator";
+import { ADD_FARMER, ADD_BUYER, FARMERS_FETCHED, GROUP_ADDED, POST_ADDED, POST_TARGET_ADDED } from "../actions/userDataCreator";
 
 import { updateObject } from "../../utils/stateUpdater";
 
@@ -46,7 +46,15 @@ export function reducer(state = initialState, action) {
             updateObject(state, {
                 farmersData: action
             });
-            console.log(action);
+            return {
+                farmersData: action
+            };
+         
+        }
+        case POST_TARGET_ADDED: {
+            updateObject(state, {
+                farmersData: action
+            });
             return {
                 farmersData: action
             };
